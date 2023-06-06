@@ -1,0 +1,124 @@
+.navbar{
+    width: 100vw;
+    height: 10vh;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.25);
+    /* background-color: #121212; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 60vw;
+}
+
+.App-name a{
+    font-family: 'Quicksand';
+    font-size: 1.5vw;
+    font-weight: 500;
+    color: #fff;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+.links{
+    display: flex;
+    gap: 5vw;
+    height: 100%;
+    align-items: center;
+}
+.links a{
+    font-family: 'Quicksand';
+    font-size: 1.2vw;
+    font-weight: 400;
+    color: #fff;
+    text-decoration: none;
+}
+
+.color-drop{
+    display: none;
+}
+
+.dropdown{
+    float: left;
+    overflow: hidden;
+    height: 100%;
+}
+
+.dropbtn{
+    font-family: 'Quicksand';
+    font-size: 1.2vw;
+    font-weight: 400;
+    color: #fff;
+    cursor: pointer;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    gap: 0.2vw;
+}
+.dropbtn:hover{
+
+    background: linear-gradient(89.84deg, #ad4df7 0.85%, #E78B3C 99.88%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+
+transition: .2s ease-out;
+
+}
+
+.drop, .color-drop{
+    width: 1vw;
+}
+
+.dropbtn:hover .drop{
+    display: none;
+}
+.dropbtn:hover .color-drop{
+    display: inline;
+}
+
+.dropdown-content{
+    display: none;
+  position: absolute;
+  top: 8vh;
+  background-color: #121212;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  border: 1px solid rgba(255, 255, 255, 0.25);;
+  z-index: 1;
+}
+.dropdown-content a {
+    float: none;
+    color: #fff;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+  }
+  .dropdown-content a:hover {
+    background-color: #ddd;
+  }
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+.pdf{
+    background: linear-gradient(89.84deg, #af61ec 0.85%, #E78B3C 99.88%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+font-weight: bolder;
+}
+
+.logo{
+    height: 2.8vw;
+    width: 2.8vw;
+    margin-right: 0.5vw;
+}
+.links a:hover{
+    background: linear-gradient(89.84deg, #ad4df7 0.85%, #E78B3C 99.88%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+
+transition: .2s ease-out;
+
+}

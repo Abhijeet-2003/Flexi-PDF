@@ -1,0 +1,17 @@
+.Homepage{
+    background-color: #121212;
+    width: 100vw;
+    height: 100vh;
+    background-image: url('../../assets/Home/bg.svg');
+    background-position: bottom;
+  background-repeat: no-repeat;
+}
+
+.collection{
+    /* margin-top: 20px; */
+    width: 90vw;
+    height: 60vh;
+    margin: 20px auto;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    background-color: rgb(18, 18, 18);
+}

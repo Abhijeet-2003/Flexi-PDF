@@ -1,0 +1,111 @@
+.Upload{
+    display: flex;
+    width: 100vw;
+    justify-content: center;
+    gap: 5vw;
+    margin-top: 8vh;
+    /* gap: 5vw; */
+}
+
+.upload-left{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.upload-left input[type="file"]{
+    font-family: 'Quicksand';
+    font-weight: 600;
+    color: #fff;
+}
+
+.adobe{
+    transform: scale(0.6);
+    display: none;
+}
+
+.upload-right{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* align-items: flex-start; */
+}
+
+.comp-buttons{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    /* align-items: flex-start; */
+    gap: 3vh;
+}
+
+/* .comp-download{
+    background:
+    linear-gradient(#1e1e1e 0 0) padding-box, 
+    linear-gradient(267.95deg, #E78B3A 1%, #9B3AE7 98.56%) border-box;
+    font-family: 'Quicksand';
+    font-weight: 600;
+    font-size: 1.4vw;
+    color: #fff;
+    background-color: #121212;
+    border: 1px solid transparent;
+    width: 15vw;
+    height: 7vh;
+    text-align: center;
+    cursor: pointer;
+} */
+.comp-download:hover{
+    transform: scale(1.05);
+    transition: .2s ease-out;
+    
+}
+
+.loading{
+    font-family: 'Quicksand';
+    font-weight: 600;
+    font-size: 1.4vw;
+    background-color: #121212;
+    /* border: 1px solid transparent; */
+    width: 15vw;
+    height: 7vh;
+    text-align: center;
+    background: linear-gradient(89.84deg, #b35ef3 0.85%, #E78B3C 99.88%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+}
+
+.pdf-input{
+    font-family: 'Quicksand';
+    font-weight: 400;
+    color: #fff;
+    margin-bottom: 5vh;
+}
+
+.compress button{
+    font-family: 'Quicksand';
+    font-weight: 600;
+    font-size: 1vw;
+    color: #fff;
+    background-color: #121212;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    width: 15vw;
+    height: 7vh;
+    text-align: left;
+    padding-left: 1vw;
+    cursor: pointer;
+    /* background:
+    linear-gradient(#1e1e1e 0 0) padding-box, 
+    linear-gradient(267.95deg, #E78B3A 1%, #9B3AE7 98.56%) border-box; */
+}
+
+.compress button:hover{
+    transform: scale(1.05);
+    transition: .2s ease-out;
+    background: linear-gradient(89.84deg, #b35ef3 0.85%, #E78B3C 99.88%); 
+ -webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+
+}
