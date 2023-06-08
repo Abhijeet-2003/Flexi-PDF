@@ -3,7 +3,7 @@ import cors from 'cors'
 const app = express();
 
 import compressRoutes from "./routes/compressRoutes.js"
-import downloadRoutes from "./routes/downloadRoutes.js"
+// import downloadRoutes from "./routes/downloadRoutes.js"
 
 app.use(express.json());
 app.use(
@@ -19,4 +19,4 @@ app.listen(8000, () => {
 });
 
 app.use('/api/compress', compressRoutes);
-app.use('/api/download', downloadRoutes);
+// app.use('/api/download', downloadRoutes);

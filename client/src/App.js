@@ -18,13 +18,13 @@ function App() {
         <Route exact path="/compress">
           <Compress/>
         </Route>
-        <Route exact path="/convertToDoc">
+        <Route exact path="/convertPdfToDoc">
           <Doc/>
         </Route>
-        <Route exact path="/convertToPPT">
+        <Route exact path="/convertPdfToPPT">
           <Ppt/>
         </Route>
-        <Route exact path="/convertToExcel">
+        <Route exact path="/convertPdfToExcel">
           <Excel/>
         </Route>
       </Switch>

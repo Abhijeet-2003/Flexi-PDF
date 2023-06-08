@@ -2,7 +2,7 @@ import {Router} from 'express';
 
 const router = Router();
 
-import {extremeCompress, mediumCompress, lowCompress} from "./compressController.js";
+import {extremeCompress, mediumCompress, lowCompress, deleteFiles, downloadController} from "./compressController.js";
 
 import multer from 'multer';
 import { fileURLToPath } from 'url';
@@ -27,5 +27,7 @@ const upload = multer({storage: storage})
 router.post('/extreme', upload.single("uploadedPDF"), extremeCompress);
 router.post('/medium', upload.single("uploadedPDF"), mediumCompress);
 router.post('/low', upload.single("uploadedPDF"), lowCompress);
+router.get('/download/:name', downloadController);
+router.delete('/delete/:name', deleteFiles)
 
 export default router;

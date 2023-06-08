@@ -106,7 +106,7 @@ function PDFUpload() {
 
   const handleDownload = async () => {
     axios({
-      url: `http://localhost:8000/api/download/${selectedFile.name}`,
+      url: `http://localhost:8000/api/compress/download/${selectedFile.name}`,
       method: 'GET',
       responseType: 'blob', // Specify the response type as blob
     })
@@ -120,6 +120,15 @@ function PDFUpload() {
         link.click();
         link.remove();
         setIsCompressed(false);
+
+        axios.delete(`http://localhost:8000/api/compress/delete/${selectedFile.name}`)
+        .then((response) => {
+          console.log('Files deleted successfully');
+        })
+        .catch((error) => {
+          console.error('Error deleting files:', error);
+        });
+
       })
       .catch((error) => {
         console.error('Error downloading PDF:', error);

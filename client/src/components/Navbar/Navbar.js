@@ -13,14 +13,14 @@ const Navbar = () => {
             <div className="links">
                 <Link to="/compress">Compress</Link>
                 <div className="dropdown">
-                    <div className="dropbtn">Convert To 
+                    <div className="dropbtn">Convert 
                         <img src={drop} alt="" className='drop'/>
                         <img src={dropColor} alt="" className='color-drop'/>
                     </div>
                     <div className="dropdown-content">
-                        <Link to="/ConvertToDoc">Word</Link>
-                        <Link to="/ConvertToPPT">Powerpoint</Link>
-                        <Link to="/ConvertToExcel">Excel</Link>
+                        <Link to="/ConvertPdfToDoc">PDF To Word</Link>
+                        <Link to="/ConvertPdfToPPT">PDF To PPT</Link>
+                        <Link to="/ConvertPdfToExcel">PDF To XLSX</Link>
                     </div>
                 </div>
             </div>

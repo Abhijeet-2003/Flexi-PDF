@@ -4,13 +4,13 @@
 
 @keyframes rotate {
 	100% {
-		transform: rotate(8turn);
+		transform: rotate(7turn);
 	}
 }
 
 .upload-left {
-  width: 694px;
-  height: 463px;
+  width: 48.3vw;
+  height: 53.9vh;
 //   left: 223px;
 // top: -10px;
 // margin-top: 44px;
@@ -40,7 +40,7 @@
 		content: '';
 		position: absolute;
 		z-index: -2;
-		left: -10%;
+		left: -21%;
 		top: -48%;
 		width: 944px;
 		height: 944px;
