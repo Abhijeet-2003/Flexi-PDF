@@ -1,4 +1,5 @@
 import {Router} from 'express';
+import { convertToDOCX, convertToPPTX, convertToXLSX, downloadController, deleteFiles } from './convertController.js';
 import multer from 'multer';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
@@ -21,12 +22,10 @@ const upload = multer({storage: storage})
 
 const router = Router();
 
-import {extremeCompress, mediumCompress, lowCompress, deleteFiles, downloadController} from "./compressController.js";
-
-router.post('/extreme', upload.single("uploadedPDF"), extremeCompress);
-router.post('/medium', upload.single("uploadedPDF"), mediumCompress);
-router.post('/low', upload.single("uploadedPDF"), lowCompress);
-router.get('/download/:name', downloadController);
-router.delete('/delete/:name', deleteFiles)
+router.post( '/docx', upload.single("uploadedPDF"), convertToDOCX );
+router.post( '/pptx', upload.single("uploadedPDF"), convertToPPTX );
+router.post( '/xlsx', upload.single("uploadedPDF"), convertToXLSX );
+router.get('/download/:name/:type', downloadController);
+router.delete('/delete/:name/:type', deleteFiles);
 
 export default router;

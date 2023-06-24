@@ -1,14 +1,13 @@
 import Navbar from "../../components/Navbar/Navbar";
-import ToPPT from "../../components/ToPPT/ToPPT";
 
-const Powerpoint = () => {
+const Zip = () => {
     return (
         <div className="Doc-home">
             <Navbar/>
 
-            <ToPPT/>
+            
         </div>
     );
 }
  
-export default Powerpoint;
+export default Zip;

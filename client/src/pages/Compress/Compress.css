@@ -2,5 +2,8 @@
     width: 100vw;
     height: 100vh;
     background-color: #121212;
+    background-image: url('../../assets/Home/bg.svg');
+    background-position: bottom;
+  background-repeat: no-repeat;
 }
 

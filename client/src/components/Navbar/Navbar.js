@@ -11,18 +11,23 @@ const Navbar = () => {
                 <Link to="/"><img src={logo} alt="" className="logo" />Flexi~<span className='pdf'>PDF</span></Link>
             </div>
             <div className="links">
-                <Link to="/compress">Compress</Link>
                 <div className="dropdown">
                     <div className="dropbtn">Convert 
                         <img src={drop} alt="" className='drop'/>
                         <img src={dropColor} alt="" className='color-drop'/>
                     </div>
                     <div className="dropdown-content">
-                        <Link to="/ConvertPdfToDoc">PDF To Word</Link>
-                        <Link to="/ConvertPdfToPPT">PDF To PPT</Link>
-                        <Link to="/ConvertPdfToExcel">PDF To XLSX</Link>
+                        <div className="row">
+                            <Link to="/ConvertPdfToDoc">PDF To DOCX</Link>
+                            <Link to="/ConvertPdfToPPT">PDF To PPTX</Link>
+                        </div>
+                        <div className='row'>
+                            <Link to="/ConvertPdfToExcel">PDF To XLSX</Link>
+                            <Link to="/ConvertPdfToZip">PDF To PNG</Link>
+                        </div>
                     </div>
                 </div>
+                <Link to="/compress">Compress</Link>
             </div>
         </div>
     );

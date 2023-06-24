@@ -6,6 +6,7 @@ import Compress from './pages/Compress/Compress';
 import Doc from './pages/ToDoc/Doc';
 import Ppt from './pages/ToPPT/Ppt';
 import Excel from './pages/ToXL/Excel';
+import Zip from './pages/ToZip/Zip';
 
 function App() {
   return (
@@ -26,6 +27,9 @@ function App() {
         </Route>
         <Route exact path="/convertPdfToExcel">
           <Excel/>
+        </Route>
+        <Route exact path="/convertPdfToZip">
+          <Zip/>
         </Route>
       </Switch>
       </div>

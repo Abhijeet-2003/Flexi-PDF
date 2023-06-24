@@ -9,9 +9,57 @@
 
 .collection{
     /* margin-top: 20px; */
-    width: 90vw;
-    height: 60vh;
-    margin: 20px auto;
-    border: 1px solid rgba(255, 255, 255, 0.25);
+    /* width: 90vw; */
+    /* height: 60vh; */
+    display: flex;
+    justify-content: center;
+    /* gap: 1px; */
+    margin: 20vh auto;
+    /* border: 1px solid rgba(255, 255, 255, 0.25); */
     background-color: rgb(18, 18, 18);
+}
+.card{
+    width: 13.2vw;
+    height: 18vh;
+    border: 1px solid transparent;
+/* background: linear-gradient(89.84deg, #9C3BE6 0.85%, #E78B3C 99.88%); */
+background:
+    linear-gradient(#252525 0 0) padding-box, 
+    linear-gradient(#252525 0 0) border-box;
+    padding: 2vw 2vw;
+    display: flex;
+    flex-direction: column;
+    gap: 5vh;
+}
+.card:hover{
+  /* outline: none; */
+  /* transition: .3s ease-out; */
+  border: 1px solid transparent;
+/* background: linear-gradient(89.84deg, #9C3BE6 0.85%, #E78B3C 99.88%); */
+  background:
+    linear-gradient(#252525 0 0) padding-box, 
+    linear-gradient(267.95deg, #E78B3A 1%, #9B3AE7 98.56%) border-box;
+
+}
+
+.collection a{
+  text-decoration: none;
+}
+
+.title{
+  text-align: left;
+  color: #fff;
+  font-size: 1.3vw;
+  font-weight: 600;
+}
+.compress-img{
+  transform: scale(0.05);
+}
+
+.desc{
+  width: 90%;
+  color: #fff;
+  text-align: left;
+  font-size: 1vw;
+  font-weight: 300;
 }
