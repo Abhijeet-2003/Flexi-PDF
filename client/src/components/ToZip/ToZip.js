@@ -7,7 +7,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { toastMessage } from "../../utils/toastMessage";
 
-const ToXL = () => {
+const ToZip = () => {
 
     const [selectedFile, setSelectedFile] = useState(null);
     const [isCompressed, setIsCompressed] = useState(false);
@@ -31,9 +31,9 @@ const ToXL = () => {
             // console.log(formData);
             setIsCompressed(false);
             setIsLoading(true);
-            console.log('xlsx');
+            console.log('zip');
             try{
-            await axios.post("http://localhost:8000/api/convert/xlsx", formData, {
+            await axios.post("http://localhost:8000/api/convert/zip", formData, {
                 headers: {
                 'Content-Type': 'multipart/form-data',
                 },
@@ -62,7 +62,7 @@ const ToXL = () => {
 
     const handleDownload = async () => {
         axios({
-          url: `http://localhost:8000/api/convert/download/${selectedFile.name}/.xlsx`,
+          url: `http://localhost:8000/api/convert/download/${selectedFile.name}/.zip`,
           method: 'GET',
           responseType: 'blob', // Specify the response type as blob
         })
@@ -73,7 +73,7 @@ const ToXL = () => {
             link.href = url;
             const name = selectedFile.name;
             const newName = name.split(".")[0];
-            const convertedPDFPath = newName + '.xlsx';
+            const convertedPDFPath = newName + '.zip';
             console.log(response);
             link.setAttribute('download', convertedPDFPath);
             document.body.appendChild(link);
@@ -81,7 +81,7 @@ const ToXL = () => {
             link.remove();
             setIsCompressed(false);
     
-            axios.delete(`http://localhost:8000/api/convert/delete/${selectedFile.name}/.xlsx`)
+            axios.delete(`http://localhost:8000/api/convert/delete/${selectedFile.name}/.zip`)
             .then((response) => {
               console.log('Files deleted successfully');
             })
@@ -91,7 +91,7 @@ const ToXL = () => {
     
           })
           .catch((error) => {
-            console.error('Error downloading XLSX:', error);
+            console.error('Error downloading JPG zip:', error);
           });
     };
 
@@ -112,7 +112,7 @@ const ToXL = () => {
             <div className="comp-buttons">
             <div className="compress">
                 {!isLoading && !isCompressed && (
-                <button onClick={handleXL}>Convert To XLSX</button>
+                <button onClick={handleXL}>Convert To JPG</button>
                 )}
             </div>
             </div>
@@ -129,4 +129,4 @@ const ToXL = () => {
     );
 };
 
-export default ToXL;
+export default ToZip;

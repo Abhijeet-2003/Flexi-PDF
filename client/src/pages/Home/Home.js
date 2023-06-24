@@ -58,10 +58,10 @@ const Home = () => {
                     <div className="card">
 
                         <div className="title">
-                            PDF To PNG
+                            PDF To JPG
                         </div>
                         <div className="desc">
-                            Convert each PDF page into a PNG.
+                            Convert each PDF page into a JPG.
                         </div>
 
                     </div>

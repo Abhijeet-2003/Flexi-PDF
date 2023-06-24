@@ -23,7 +23,7 @@ const Navbar = () => {
                         </div>
                         <div className='row'>
                             <Link to="/ConvertPdfToExcel">PDF To XLSX</Link>
-                            <Link to="/ConvertPdfToZip">PDF To PNG</Link>
+                            <Link to="/ConvertPdfToZip">PDF To JPG</Link>
                         </div>
                     </div>
                 </div>

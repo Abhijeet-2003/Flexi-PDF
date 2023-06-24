@@ -1,5 +1,5 @@
 import {Router} from 'express';
-import { convertToDOCX, convertToPPTX, convertToXLSX, downloadController, deleteFiles } from './convertController.js';
+import { convertToDOCX, convertToPPTX, convertToXLSX, convertToZip, downloadController, deleteFiles } from './convertController.js';
 import multer from 'multer';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
@@ -25,6 +25,7 @@ const router = Router();
 router.post( '/docx', upload.single("uploadedPDF"), convertToDOCX );
 router.post( '/pptx', upload.single("uploadedPDF"), convertToPPTX );
 router.post( '/xlsx', upload.single("uploadedPDF"), convertToXLSX );
+router.post( '/zip', upload.single("uploadedPDF"), convertToZip );
 router.get('/download/:name/:type', downloadController);
 router.delete('/delete/:name/:type', deleteFiles);
 

@@ -65,15 +65,19 @@
     font-family: 'Quicksand';
     font-weight: 600;
     font-size: 1.4vw;
-    background-color: #121212;
     /* border: 1px solid transparent; */
     width: 15vw;
     height: 7vh;
     text-align: center;
-    background: linear-gradient(89.84deg, #b35ef3 0.85%, #E78B3C 99.88%);
--webkit-background-clip: text;
--webkit-text-fill-color: transparent;
-background-clip: text;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    border: 1px solid transparent;
+/* background: linear-gradient(89.84deg, #9C3BE6 0.85%, #E78B3C 99.88%); */
+  background:
+    linear-gradient(#252525 0 0) padding-box, 
+    linear-gradient(267.95deg, #E78B3A 1%, #9B3AE7 98.56%) border-box;
 }
 
 .pdf-input{

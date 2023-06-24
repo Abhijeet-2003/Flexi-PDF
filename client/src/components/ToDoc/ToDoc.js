@@ -3,6 +3,9 @@ import "../Compress/PdfUpload.scss"
 import React, { useState, useRef } from 'react';
 import adobe from "../../assets/Compress/adobe.png"
 import axios from 'axios'
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { toastMessage } from "../../utils/toastMessage";
 
 const ToDoc = () => {
 
@@ -11,6 +14,7 @@ const ToDoc = () => {
     const [isLoading, setIsLoading] = useState(false);
     const ref1 = useRef();
     const ref2 = useRef();
+    const {showToastMessage, showToastMessage2} = toastMessage();
 
     const handleFileChange = (event) => {
         const file = event.target.files[0];
@@ -39,12 +43,20 @@ const ToDoc = () => {
                 setIsCompressed(true);
                 setIsLoading(false);
                 }
+                else{
+                    setIsCompressed(false);
+                    setIsLoading(false);
+                    showToastMessage();
+                }
             }).catch((error) => {
                 console.error(error);
             });
             } catch(err) {
             console.log(err);
             }
+        }
+        else{
+            showToastMessage2();
         }
     };
 
@@ -104,7 +116,7 @@ const ToDoc = () => {
                 )}
             </div>
             </div>
-            {isLoading && <div className="loading">Converting... </div>}
+            {isLoading && <div className="loading"><div>Converting...</div></div>}
 
             {isCompressed && (
             <button className="comp-download" ref={ref2} onClick={handleDownload}>
@@ -112,6 +124,7 @@ const ToDoc = () => {
             </button>
             )}
         </div>
+        <ToastContainer/>
         </div>
     );
 };

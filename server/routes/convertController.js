@@ -99,6 +99,45 @@ export const convertToXLSX = async (req, res) => {
     }
 };
 
+export const convertToZip = async (req, res) => {
+    try {
+    // Initial setup, create credentials instance.
+    const credentials =
+    PDFServicesSdk.Credentials.serviceAccountCredentialsBuilder()
+        .fromFile(join(__dirname, 'pdfservices-api-credentials.json'))
+        .build();
+
+    //Create an ExecutionContext using credentials and create a new operation instance.
+    const executionContext = PDFServicesSdk.ExecutionContext.create(credentials),
+        exportPDFToImages = PDFServicesSdk.ExportPDFToImages,
+        exportPDFToImagesOperation = exportPDFToImages.Operation.createNew(exportPDFToImages.SupportedTargetFormats.JPEG);
+
+    // Set the output type to create zip of images.
+    exportPDFToImagesOperation.setOutputType(exportPDFToImages.OutputType.ZIP_OF_PAGE_IMAGES);
+
+    // Set operation input from a source file
+    const input = PDFServicesSdk.FileRef.createFromLocalFile(
+        join(__dirname, `/PDFs/${req.file.originalname}`));
+    exportPDFToImagesOperation.setInput(input);
+
+    const name = req.file.originalname;
+    const newName = name.split(".")[0];
+    // Execute the operation and Save the result to the specified location.
+    await exportPDFToImagesOperation.execute(executionContext)
+        .then(result => result[0].saveAsFile(join(__dirname, `/convertedPDFs/`,newName)))
+        .catch( err => {
+            console.log('Exception encountered while executing operation', err);
+        });
+
+    // await result.saveAsFile(join(__dirname, `/convertedPDFs/`,newName))
+        
+    res.status(200).send('converted');
+    } catch (err) {
+    console.log('Exception encountered while executing operation', err);
+    res.status(500).send('Error occurred during PDF conversion to JPG.');
+    }
+};
+
 export const downloadController = async (req, res) => {
     const name = req.params.name;
     const ext = req.params.type;
