@@ -4,8 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "nodemon app",
-    "start": "node app.js"
+    "test": "nodemon app"
   },
   "author": "Abhijeet Sinha",
   "license": "ISC",
