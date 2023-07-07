@@ -34,7 +34,22 @@ export const convertToDOCX = async (req, res) => {
     res.status(200).send('converted');
     } catch (err) {
     console.log('Exception encountered while executing operation:', err);
-    res.status(500).send('Error occurred during PDF conversion to DOCX.');
+
+    const originalPDFPath = join(__dirname, `PDFs/${req.file.originalname}`);
+
+    if( fs.existsSync(originalPDFPath) ){
+        fs.unlink(originalPDFPath, (error) => {
+            if (error) {
+            console.error('Error deleting original PDF file:', error);
+            // res.status(500).send('Error deleting original PDF file');
+            } else {
+            console.log('Original PDF file deleted successfully');
+            // res.status(200).send('Original file deleted');
+            }
+        });
+    }
+
+    res.status(err.statusCode).send('Error occurred during PDF conversion to DOCX.');
     }
 };
 
@@ -67,7 +82,22 @@ export const convertToPPTX = async (req, res) => {
     res.status(200).send('converted');
     } catch (err) {
     console.log('Exception encountered while executing operation:', err);
-    res.status(500).send('Error occurred during PDF conversion to PPTX.');
+
+    const originalPDFPath = join(__dirname, `PDFs/${req.file.originalname}`);
+
+    if( fs.existsSync(originalPDFPath) ){
+        fs.unlink(originalPDFPath, (error) => {
+            if (error) {
+            console.error('Error deleting original PDF file:', error);
+            // res.status(500).send('Error deleting original PDF file');
+            } else {
+            console.log('Original PDF file deleted successfully');
+            // res.status(200).send('Original file deleted');
+            }
+        });
+    }
+
+    res.status(err.statusCode).send('Error occurred during PDF conversion to PPTX.');
     }
 };
 export const convertToXLSX = async (req, res) => {
@@ -98,7 +128,22 @@ export const convertToXLSX = async (req, res) => {
     res.status(200).send('converted');
     } catch (err) {
     console.log('Exception encountered while executing operation:', err);
-    res.status(500).send('Error occurred during PDF conversion to XLSX.');
+
+    const originalPDFPath = join(__dirname, `PDFs/${req.file.originalname}`);
+
+    if( fs.existsSync(originalPDFPath) ){
+        fs.unlink(originalPDFPath, (error) => {
+            if (error) {
+            console.error('Error deleting original PDF file:', error);
+            // res.status(500).send('Error deleting original PDF file');
+            } else {
+            console.log('Original PDF file deleted successfully');
+            // res.status(200).send('Original file deleted');
+            }
+        });
+    }
+
+    res.status(err.statusCode).send('Error occurred during PDF conversion to XLSX.');
     }
 };
 
@@ -138,7 +183,22 @@ export const convertToZip = async (req, res) => {
     res.status(200).send('converted');
     } catch (err) {
     console.log('Exception encountered while executing operation', err);
-    res.status(500).send('Error occurred during PDF conversion to JPG.');
+    
+    const originalPDFPath = join(__dirname, `PDFs/${req.file.originalname}`);
+
+    if( fs.existsSync(originalPDFPath) ){
+        fs.unlink(originalPDFPath, (error) => {
+            if (error) {
+            console.error('Error deleting original PDF file:', error);
+            // res.status(500).send('Error deleting original PDF file');
+            } else {
+            console.log('Original PDF file deleted successfully');
+            // res.status(200).send('Original file deleted');
+            }
+        });
+    }
+
+    res.status(err.statusCode).send('Error occurred during PDF conversion to JPG.');
     }
 };
 
@@ -171,25 +231,29 @@ export const deleteFiles = async (req, res) => {
     const convertedPDFPath = join(__dirname, `convertedPDFs/`,newName);
     const originalPDFPath = join(__dirname, `PDFs/${req.params.name}`);
 
-    fs.unlink(originalPDFPath, (error) => {
-        if (error) {
-        console.error('Error deleting original PDF file:', error);
-        res.status(500).send('Error deleting original PDF file');
-        } else {
-        console.log('Original PDF file deleted successfully');
-        // res.status(200).send('Original file deleted');
-        }
-    });
+    if( fs.existsSync(originalPDFPath) ){
+        fs.unlink(originalPDFPath, (error) => {
+            if (error) {
+            console.error('Error deleting original PDF file:', error);
+            res.status(500).send('Error deleting original PDF file');
+            } else {
+            console.log('Original PDF file deleted successfully');
+            // res.status(200).send('Original file deleted');
+            }
+        });
+    }
     
-    fs.unlink(convertedPDFPath, (error) => {
-        if (error) {
-        console.error('Error deleting converted file:', error);
-        res.status(500).send('Error deleting converted file');
-        } else {
-        console.log('Converted file deleted successfully');
-        // res.status(200).send('Compressed file deleted');
-        }
-    });
+    if( fs.existsSync(convertedPDFPath) ){
+        fs.unlink(convertedPDFPath, (error) => {
+            if (error) {
+            console.error('Error deleting converted file:', error);
+            res.status(500).send('Error deleting converted file');
+            } else {
+            console.log('Converted file deleted successfully');
+            // res.status(200).send('Compressed file deleted');
+            }
+        });
+    }
 
     res.status(200).send('All files deleted successfully');
 };

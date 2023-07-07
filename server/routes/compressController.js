@@ -42,7 +42,21 @@ export const extremeCompress = async (req, res) => {
     // res.send(result);
   } catch (err) {
     console.log('Exception encountered while executing operation:', err);
-    res.status(500).send('Error occurred during PDF compression.');
+
+    const originalPDFPath = join(__dirname, `PDFs/${req.file.originalname}`);
+
+    if( fs.existsSync(originalPDFPath) ){
+      fs.unlink(originalPDFPath, (error) => {
+        if (error) {
+          console.error('Error deleting original PDF file:', error);
+        } else {
+          console.log('Original PDF file deleted successfully');
+          // res.status(200).send('Original file deleted');
+        }
+      });
+    }
+
+    res.status(err.statusCode).send('Error occurred during PDF compression.');
   }
 };
 
@@ -80,7 +94,21 @@ export const mediumCompress = async (req, res) => {
     // res.send(result);
   } catch (err) {
     console.log('Exception encountered while executing operation:', err);
-    res.status(500).send('Error occurred during PDF compression.');
+
+    const originalPDFPath = join(__dirname, `PDFs/${req.file.originalname}`);
+
+    if( fs.existsSync(originalPDFPath) ){
+      fs.unlink(originalPDFPath, (error) => {
+        if (error) {
+          console.error('Error deleting original PDF file:', error);
+        } else {
+          console.log('Original PDF file deleted successfully');
+          // res.status(200).send('Original file deleted');
+        }
+      });
+    }
+
+    res.status(err.statusCode).send('Error occurred during PDF compression.');
   }
 };
 
@@ -118,7 +146,21 @@ export const lowCompress = async (req, res) => {
     // res.send(result);
   } catch (err) {
     console.log('Exception encountered while executing operation:', err);
-    res.status(500).send('Error occurred during PDF compression.');
+
+    const originalPDFPath = join(__dirname, `PDFs/${req.file.originalname}`);
+
+    if( fs.existsSync(originalPDFPath) ){
+      fs.unlink(originalPDFPath, (error) => {
+        if (error) {
+          console.error('Error deleting original PDF file:', error);
+        } else {
+          console.log('Original PDF file deleted successfully');
+          // res.status(200).send('Original file deleted');
+        }
+      });
+    }
+
+    res.status(err.statusCode).send('Error occurred during PDF compression.');
   }
 };
 
@@ -138,25 +180,29 @@ export const deleteFiles = async (req, res) => {
   const compressedPDFPath = join(__dirname, `compressedPDFs/compressed-${req.params.name}`);
   const originalPDFPath = join(__dirname, `PDFs/${req.params.name}`);
 
-  fs.unlink(originalPDFPath, (error) => {
-    if (error) {
-      console.error('Error deleting original PDF file:', error);
-      res.status(500).send('Error deleting original PDF file');
-    } else {
-      console.log('Original PDF file deleted successfully');
-      // res.status(200).send('Original file deleted');
-    }
-  });
+  if( fs.existsSync(originalPDFPath) ){
+    fs.unlink(originalPDFPath, (error) => {
+      if (error) {
+        console.error('Error deleting original PDF file:', error);
+        res.status(500).send('Error deleting original PDF file');
+      } else {
+        console.log('Original PDF file deleted successfully');
+        // res.status(200).send('Original file deleted');
+      }
+    });
+  }
   
-  fs.unlink(compressedPDFPath, (error) => {
-    if (error) {
-      console.error('Error deleting compressed PDF file:', error);
-      res.status(500).send('Error deleting compressed PDF file');
-    } else {
-      console.log('Compressed PDF file deleted successfully');
-      // res.status(200).send('Compressed file deleted');
-    }
-  });
+  if( fs.existsSync(compressedPDFPath) ){
+    fs.unlink(compressedPDFPath, (error) => {
+      if (error) {
+        console.error('Error deleting compressed PDF file:', error);
+        res.status(500).send('Error deleting compressed PDF file');
+      } else {
+        console.log('Compressed PDF file deleted successfully');
+        // res.status(200).send('Compressed file deleted');
+      }
+    });
+  }
 
   res.status(200).send('All files deleted successfully');
 }
