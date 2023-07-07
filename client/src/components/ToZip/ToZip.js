@@ -39,16 +39,15 @@ const ToZip = () => {
                 },
                 withCredentials: true
             }).then((response) => {
-                if(response.data === 'converted'){
-                setIsCompressed(true);
+            
+                if (response.data === "converted" && response.status === 200) {
+                  setIsCompressed(true);
+                } 
                 setIsLoading(false);
-                }
-                else{
-                    setIsCompressed(false);
-                    setIsLoading(false);
-                    showToastMessage();
-                }
-            }).catch((error) => {
+              }).catch((error) => {
+                setIsCompressed(false);
+                setIsLoading(false);
+                showToastMessage();
                 console.error(error);
             });
             } catch(err) {
@@ -81,19 +80,21 @@ const ToZip = () => {
             link.remove();
             setIsCompressed(false);
     
-            axios.delete(`http://localhost:8000/api/convert/delete/${selectedFile.name}/.zip`)
+            handleDelete();
+          })
+          .catch((error) => {
+            console.error('Error downloading JPG zip:', error);
+          });
+    };
+    const handleDelete = async () => {
+        axios.delete(`http://localhost:8000/api/convert/delete/${selectedFile.name}/.zip`)
             .then((response) => {
               console.log('Files deleted successfully');
             })
             .catch((error) => {
               console.error('Error deleting files:', error);
             });
-    
-          })
-          .catch((error) => {
-            console.error('Error downloading JPG zip:', error);
-          });
-    };
+    }
 
     return (
         <div className="Upload">

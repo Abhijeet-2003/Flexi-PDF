@@ -40,17 +40,16 @@ function PDFUpload() {
             withCredentials: true,
           })
           .then((response) => {
-            if (response.data === "compressed") {
+            
+            if (response.data === "compressed" && response.status === 200) {
               setIsCompressed(true);
-              setIsLoading(false);
-            }
-            else{
-              setIsCompressed(false);
-              setIsLoading(false);
-              showToastMessage();
-            }
+            } 
+            setIsLoading(false);
           })
           .catch((error) => {
+            setIsCompressed(false);
+            setIsLoading(false);
+            showToastMessage();
             console.error(error);
           });
       } catch (err) {
@@ -79,17 +78,16 @@ function PDFUpload() {
             withCredentials: true,
           })
           .then((response) => {
-            if (response.data === "compressed") {
+
+            if (response.data === "compressed" && response.status === 200) {
               setIsCompressed(true);
-              setIsLoading(false);
-            }
-            else{
-              setIsCompressed(false);
-              setIsLoading(false);
-              showToastMessage();
-            }
+            } 
+            setIsLoading(false);
           })
           .catch((error) => {
+            setIsCompressed(false);
+            setIsLoading(false);
+            showToastMessage();
             console.error(error);
           });
       } catch (err) {
@@ -118,17 +116,16 @@ function PDFUpload() {
             withCredentials: true,
           })
           .then((response) => {
-            if (response.data === "compressed") {
+
+            if (response.data === "compressed" && response.status === 200) {
               setIsCompressed(true);
-              setIsLoading(false);
-            }
-            else{
-              setIsCompressed(false);
-              setIsLoading(false);
-              showToastMessage();
-            }
+            } 
+            setIsLoading(false);
           })
           .catch((error) => {
+            setIsCompressed(false);
+            setIsLoading(false);
+            showToastMessage();
             console.error(error);
           });
       } catch (err) {
@@ -157,21 +154,25 @@ function PDFUpload() {
         link.remove();
         setIsCompressed(false);
 
-        axios
-          .delete(
-            `http://localhost:8000/api/compress/delete/${selectedFile.name}`
-          )
-          .then((response) => {
-            console.log("Files deleted successfully");
-          })
-          .catch((error) => {
-            console.error("Error deleting files:", error);
-          });
+        handleDelete();
       })
       .catch((error) => {
         console.error("Error downloading PDF:", error);
       });
   };
+
+  const handleDelete = async () => {
+    axios
+        .delete(
+          `http://localhost:8000/api/compress/delete/${selectedFile.name}`
+        )
+        .then((response) => {
+          console.log("Files deleted successfully");
+        })
+        .catch((error) => {
+          console.error("Error deleting files:", error);
+        });
+  }
 
   return (
     <div className="Upload">
