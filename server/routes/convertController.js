@@ -9,10 +9,11 @@ const __dirname = dirname(__filename);
 export const convertToDOCX = async (req, res) => {
     try {
     // Initial setup, create credentials instance.
-    const credentials =
-    PDFServicesSdk.Credentials.serviceAccountCredentialsBuilder()
-      .fromFile(join(__dirname, 'pdfservices-api-credentials.json'))
-      .build();
+    const credentials =  PDFServicesSdk.Credentials
+         .servicePrincipalCredentialsBuilder()
+         .withClientId(process.env.CLIENT_ID)
+         .withClientSecret(process.env.CLIENT_SECRET)
+         .build();
 
     //Create an ExecutionContext using credentials and create a new operation instance.
     const executionContext = PDFServicesSdk.ExecutionContext.create(credentials),
@@ -41,10 +42,11 @@ export const convertToDOCX = async (req, res) => {
 export const convertToPPTX = async (req, res) => {
     try {
     // Initial setup, create credentials instance.
-    const credentials =
-    PDFServicesSdk.Credentials.serviceAccountCredentialsBuilder()
-        .fromFile(join(__dirname, 'pdfservices-api-credentials.json'))
-        .build();
+    const credentials =  PDFServicesSdk.Credentials
+         .servicePrincipalCredentialsBuilder()
+         .withClientId(process.env.CLIENT_ID)
+         .withClientSecret(process.env.CLIENT_SECRET)
+         .build();
 
     //Create an ExecutionContext using credentials and create a new operation instance.
     const executionContext = PDFServicesSdk.ExecutionContext.create(credentials),
@@ -71,10 +73,11 @@ export const convertToPPTX = async (req, res) => {
 export const convertToXLSX = async (req, res) => {
     try {
     // Initial setup, create credentials instance.
-    const credentials =
-    PDFServicesSdk.Credentials.serviceAccountCredentialsBuilder()
-        .fromFile(join(__dirname, 'pdfservices-api-credentials.json'))
-        .build();
+    const credentials =  PDFServicesSdk.Credentials
+         .servicePrincipalCredentialsBuilder()
+         .withClientId(process.env.CLIENT_ID)
+         .withClientSecret(process.env.CLIENT_SECRET)
+         .build();
 
     //Create an ExecutionContext using credentials and create a new operation instance.
     const executionContext = PDFServicesSdk.ExecutionContext.create(credentials),
@@ -102,10 +105,11 @@ export const convertToXLSX = async (req, res) => {
 export const convertToZip = async (req, res) => {
     try {
     // Initial setup, create credentials instance.
-    const credentials =
-    PDFServicesSdk.Credentials.serviceAccountCredentialsBuilder()
-        .fromFile(join(__dirname, 'pdfservices-api-credentials.json'))
-        .build();
+    const credentials =  PDFServicesSdk.Credentials
+         .servicePrincipalCredentialsBuilder()
+         .withClientId(process.env.CLIENT_ID)
+         .withClientSecret(process.env.CLIENT_SECRET)
+         .build();
 
     //Create an ExecutionContext using credentials and create a new operation instance.
     const executionContext = PDFServicesSdk.ExecutionContext.create(credentials),

@@ -1,18 +1,21 @@
 import PDFServicesSdk from "@adobe/pdfservices-node-sdk";
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
+import dotenv from 'dotenv';
 import fs from 'fs';
 
+dotenv.config();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 export const extremeCompress = async (req, res) => {
   try {
     // Initial setup, create credentials instance.
-    const credentials =
-      PDFServicesSdk.Credentials.serviceAccountCredentialsBuilder()
-        .fromFile(join(__dirname, 'pdfservices-api-credentials.json'))
-        .build();
+    const credentials =  PDFServicesSdk.Credentials
+         .servicePrincipalCredentialsBuilder()
+         .withClientId(process.env.CLIENT_ID)
+         .withClientSecret(process.env.CLIENT_SECRET)
+         .build();
 
     // Create an ExecutionContext using credentials and create a new operation instance.
     const executionContext = PDFServicesSdk.ExecutionContext.create(credentials);
@@ -46,10 +49,11 @@ export const extremeCompress = async (req, res) => {
 export const mediumCompress = async (req, res) => {
   try {
     // Initial setup, create credentials instance.
-    const credentials =
-      PDFServicesSdk.Credentials.serviceAccountCredentialsBuilder()
-        .fromFile(join(__dirname, 'pdfservices-api-credentials.json'))
-        .build();
+    const credentials =  PDFServicesSdk.Credentials
+         .servicePrincipalCredentialsBuilder()
+         .withClientId(process.env.CLIENT_ID)
+         .withClientSecret(process.env.CLIENT_SECRET)
+         .build();
 
     // Create an ExecutionContext using credentials and create a new operation instance.
     const executionContext = PDFServicesSdk.ExecutionContext.create(credentials);
@@ -83,10 +87,11 @@ export const mediumCompress = async (req, res) => {
 export const lowCompress = async (req, res) => {
   try {
     // Initial setup, create credentials instance.
-    const credentials =
-      PDFServicesSdk.Credentials.serviceAccountCredentialsBuilder()
-        .fromFile(join(__dirname, 'pdfservices-api-credentials.json'))
-        .build();
+    const credentials =  PDFServicesSdk.Credentials
+         .servicePrincipalCredentialsBuilder()
+         .withClientId(process.env.CLIENT_ID)
+         .withClientSecret(process.env.CLIENT_SECRET)
+         .build();
 
     // Create an ExecutionContext using credentials and create a new operation instance.
     const executionContext = PDFServicesSdk.ExecutionContext.create(credentials);
