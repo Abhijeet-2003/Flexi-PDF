@@ -23,7 +23,7 @@ export const extremeCompress = async (req, res) => {
 
     // Set operation input from a source file.
     const input = PDFServicesSdk.FileRef.createFromLocalFile(
-      join(__dirname, `/PDFs/${req.file.originalname}`),
+      join(__dirname, `/tmp/${req.file.originalname}`),
       PDFServicesSdk.CompressPDF.SupportedSourceFormat.pdf
     );
     compressPDFOperation.setInput(input);
@@ -36,25 +36,27 @@ export const extremeCompress = async (req, res) => {
 
     // Execute the operation and save the result to the specified location.
     const result = await compressPDFOperation.execute(executionContext);
-    await result.saveAsFile(join(__dirname, `/compressedPDFs/compressed-${req.file.originalname}`));
+    await result.saveAsFile(join(__dirname, `/tmp/compressed-${req.file.originalname}`));
     // const msg = 'compressed';
     res.status(200).send('compressed');
     // res.send(result);
   } catch (err) {
     console.log('Exception encountered while executing operation:', err);
 
-    const originalPDFPath = join(__dirname, `PDFs/${req.file.originalname}`);
+    const originalPDFPath = join(__dirname, `tmp`);
 
-    if( fs.existsSync(originalPDFPath) ){
-      fs.unlink(originalPDFPath, (error) => {
-        if (error) {
-          console.error('Error deleting original PDF file:', error);
-        } else {
-          console.log('Original PDF file deleted successfully');
-          // res.status(200).send('Original file deleted');
-        }
-      });
-    }
+  if( fs.existsSync(originalPDFPath) ){
+    fs.rm(originalPDFPath, {recursive: true}, (error) => {
+      if (error) {
+        console.error('Error deleting tmp folder', error);
+        res.status(500).send('Error deleting tmp folder');
+      } else {
+        console.log('tmp folder deleted successfully');
+        res.status(200).send('tmp folder deleted successfully');
+        // res.status(200).send('Original file deleted');
+      }
+    });
+  }
 
     res.status(err.statusCode).send('Error occurred during PDF compression.');
   }
@@ -75,7 +77,7 @@ export const mediumCompress = async (req, res) => {
 
     // Set operation input from a source file.
     const input = PDFServicesSdk.FileRef.createFromLocalFile(
-      join(__dirname, `/PDFs/${req.file.originalname}`),
+      join(__dirname, `/tmp/${req.file.originalname}`),
       PDFServicesSdk.CompressPDF.SupportedSourceFormat.pdf
     );
     compressPDFOperation.setInput(input);
@@ -88,25 +90,27 @@ export const mediumCompress = async (req, res) => {
 
     // Execute the operation and save the result to the specified location.
     const result = await compressPDFOperation.execute(executionContext);
-    await result.saveAsFile(join(__dirname, `/compressedPDFs/compressed-${req.file.originalname}`));
+    await result.saveAsFile(join(__dirname, `/tmp/compressed-${req.file.originalname}`));
     res.status(200).send('compressed');
 
     // res.send(result);
   } catch (err) {
     console.log('Exception encountered while executing operation:', err);
 
-    const originalPDFPath = join(__dirname, `PDFs/${req.file.originalname}`);
+    const originalPDFPath = join(__dirname, `tmp`);
 
-    if( fs.existsSync(originalPDFPath) ){
-      fs.unlink(originalPDFPath, (error) => {
-        if (error) {
-          console.error('Error deleting original PDF file:', error);
-        } else {
-          console.log('Original PDF file deleted successfully');
-          // res.status(200).send('Original file deleted');
-        }
-      });
-    }
+  if( fs.existsSync(originalPDFPath) ){
+    fs.rm(originalPDFPath, {recursive: true}, (error) => {
+      if (error) {
+        console.error('Error deleting tmp folder', error);
+        res.status(500).send('Error deleting tmp folder');
+      } else {
+        console.log('tmp folder deleted successfully');
+        res.status(200).send('tmp folder deleted successfully');
+        // res.status(200).send('Original file deleted');
+      }
+    });
+  }
 
     res.status(err.statusCode).send('Error occurred during PDF compression.');
   }
@@ -127,7 +131,7 @@ export const lowCompress = async (req, res) => {
 
     // Set operation input from a source file.
     const input = PDFServicesSdk.FileRef.createFromLocalFile(
-      join(__dirname, `/PDFs/${req.file.originalname}`),
+      join(__dirname, `/tmp/${req.file.originalname}`),
       PDFServicesSdk.CompressPDF.SupportedSourceFormat.pdf
     );
     compressPDFOperation.setInput(input);
@@ -140,32 +144,34 @@ export const lowCompress = async (req, res) => {
 
     // Execute the operation and save the result to the specified location.
     const result = await compressPDFOperation.execute(executionContext);
-    await result.saveAsFile(join(__dirname, `/compressedPDFs/compressed-${req.file.originalname}`));
+    await result.saveAsFile(join(__dirname, `/tmp/compressed-${req.file.originalname}`));
     res.status(200).send('compressed');
 
     // res.send(result);
   } catch (err) {
     console.log('Exception encountered while executing operation:', err);
 
-    const originalPDFPath = join(__dirname, `PDFs/${req.file.originalname}`);
+    const originalPDFPath = join(__dirname, `tmp`);
 
-    if( fs.existsSync(originalPDFPath) ){
-      fs.unlink(originalPDFPath, (error) => {
-        if (error) {
-          console.error('Error deleting original PDF file:', error);
-        } else {
-          console.log('Original PDF file deleted successfully');
-          // res.status(200).send('Original file deleted');
-        }
-      });
-    }
+  if( fs.existsSync(originalPDFPath) ){
+    fs.rm(originalPDFPath, {recursive: true}, (error) => {
+      if (error) {
+        console.error('Error deleting tmp folder', error);
+        res.status(500).send('Error deleting tmp folder');
+      } else {
+        console.log('tmp folder deleted successfully');
+        res.status(200).send('tmp folder deleted successfully');
+        // res.status(200).send('Original file deleted');
+      }
+    });
+  }
 
     res.status(err.statusCode).send('Error occurred during PDF compression.');
   }
 };
 
 export const downloadController = async (req, res) => {
-  const compressedPDFPath = join(__dirname, `compressedPDFs/compressed-${req.params.name}`);
+  const compressedPDFPath = join(__dirname, `tmp/compressed-${req.params.name}`);
   // const originalPDFPath = join(__dirname, `PDFs/${req.params.name}`);
 
   // Set the appropriate headers for the response
@@ -177,32 +183,19 @@ export const downloadController = async (req, res) => {
 }
 
 export const deleteFiles = async (req, res) => {
-  const compressedPDFPath = join(__dirname, `compressedPDFs/compressed-${req.params.name}`);
-  const originalPDFPath = join(__dirname, `PDFs/${req.params.name}`);
+  // const compressedPDFPath = join(__dirname, `tmp/compressed-${req.params.name}`);
+  const originalPDFPath = join(__dirname, `tmp`);
 
   if( fs.existsSync(originalPDFPath) ){
-    fs.unlink(originalPDFPath, (error) => {
+    fs.rm(originalPDFPath, {recursive: true}, (error) => {
       if (error) {
-        console.error('Error deleting original PDF file:', error);
-        res.status(500).send('Error deleting original PDF file');
+        console.error('Error deleting tmp folder', error);
+        res.status(500).send('Error deleting tmp folder');
       } else {
-        console.log('Original PDF file deleted successfully');
+        console.log('tmp folder deleted successfully');
+        res.status(200).send('tmp folder deleted successfully');
         // res.status(200).send('Original file deleted');
       }
     });
   }
-  
-  if( fs.existsSync(compressedPDFPath) ){
-    fs.unlink(compressedPDFPath, (error) => {
-      if (error) {
-        console.error('Error deleting compressed PDF file:', error);
-        res.status(500).send('Error deleting compressed PDF file');
-      } else {
-        console.log('Compressed PDF file deleted successfully');
-        // res.status(200).send('Compressed file deleted');
-      }
-    });
-  }
-
-  res.status(200).send('All files deleted successfully');
 }

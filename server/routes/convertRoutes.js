@@ -2,14 +2,22 @@ import {Router} from 'express';
 import { convertToDOCX, convertToPPTX, convertToXLSX, convertToZip, downloadController, deleteFiles } from './convertController.js';
 import multer from 'multer';
 import { fileURLToPath } from 'url';
-import { dirname } from 'path';
+import { dirname, join } from 'path';
+import fs from 'fs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, __dirname + '/PDFs');
+        fs.mkdir(join(__dirname, '/tmp'), { recursive: true }, (error) => {
+            if (error) {
+              console.error('Error creating folder:', error);
+            } else {
+              console.log('Folder created successfully');
+            }
+            cb(null, __dirname + '/tmp');
+        });
     },
     filename: (req, file, cb) => {
         console.log("File uploaded");
