@@ -9,14 +9,7 @@ const __dirname = dirname(__filename);
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        fs.mkdir('./tmp', { recursive: true }, (error) => {
-            if (error) {
-              console.error('Error creating folder:', error);
-            } else {
-              console.log('Folder created successfully');
-            }
-            cb(null, './tmp');
-        });
+        cb(null, '/tmp');
     },
     filename: (req, file, cb) => {
         console.log("File uploaded");

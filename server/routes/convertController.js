@@ -24,33 +24,40 @@ export const convertToDOCX = async (req, res) => {
 
     // Set operation input from a source file
     const input = PDFServicesSdk.FileRef.createFromLocalFile(
-        `./tmp/${req.file.originalname}`);
+        `/tmp/${req.file.originalname}`);
     exportPdfOperation.setInput(input);
     
     const name = req.file.originalname;
     const newName = name.split(".")[0];
     // Execute the operation and Save the result to the specified location.
     const result = await exportPdfOperation.execute(executionContext);
-    await result.saveAsFile(`./tmp/${newName}`)
+    await result.saveAsFile(`/tmp/${newName}`)
     
     res.status(200).send('converted');
     } catch (err) {
     console.log('Exception encountered while executing operation:', err);
 
-    const folderPath = `./tmp`;
+    const folderPath = `/tmp`;
 
-  if( fs.existsSync(folderPath) ){
-    fs.rm(folderPath, {recursive: true}, (error) => {
-      if (error) {
-        console.error('Error deleting tmp folder', error);
-        // res.status(500).send('Error deleting tmp folder');
-      } else {
-        console.log('tmp folder deleted successfully');
-        // res.status(200).send('tmp folder deleted successfully');
-        // res.status(200).send('Original file deleted');
-      }
+
+  fs.readdir(folderPath, (error, files) => {
+    if (error) {
+      console.error('Error reading folder:', error);
+      res.status(500).send('Error deleting files in tmp folder');
+      return;
+    }
+  
+    files.forEach((file) => {
+      const filePath = join(folderPath, file);
+      fs.unlink(filePath, (error) => {
+        if (error) {
+          console.error('Error deleting file:', error);
+        } else {
+          console.log(`Deleted file: ${filePath}`);
+        }
+      });
     });
-  }
+  });
 
     res.status(err.statusCode).send('Error occurred during PDF conversion to DOCX.');
     }
@@ -73,33 +80,40 @@ export const convertToPPTX = async (req, res) => {
 
     // Set operation input from a source file
     const input = PDFServicesSdk.FileRef.createFromLocalFile(
-        `./tmp/${req.file.originalname}`);
+        `/tmp/${req.file.originalname}`);
     exportPdfOperation.setInput(input);
     
     const name = req.file.originalname;
     const newName = name.split(".")[0];
     // Execute the operation and Save the result to the specified location.
     const result = await exportPdfOperation.execute(executionContext);
-    await result.saveAsFile(`./tmp/${newName}`)
+    await result.saveAsFile(`/tmp/${newName}`)
     
     res.status(200).send('converted');
     } catch (err) {
     console.log('Exception encountered while executing operation:', err);
 
-    const folderPath = `./tmp`;
+    const folderPath = `/tmp`;
 
-  if( fs.existsSync(folderPath) ){
-    fs.rm(folderPath, {recursive: true}, (error) => {
-      if (error) {
-        console.error('Error deleting tmp folder', error);
-        // res.status(500).send('Error deleting tmp folder');
-      } else {
-        console.log('tmp folder deleted successfully');
-        // res.status(200).send('tmp folder deleted successfully');
-        // res.status(200).send('Original file deleted');
-      }
+
+  fs.readdir(folderPath, (error, files) => {
+    if (error) {
+      console.error('Error reading folder:', error);
+      res.status(500).send('Error deleting files in tmp folder');
+      return;
+    }
+  
+    files.forEach((file) => {
+      const filePath = join(folderPath, file);
+      fs.unlink(filePath, (error) => {
+        if (error) {
+          console.error('Error deleting file:', error);
+        } else {
+          console.log(`Deleted file: ${filePath}`);
+        }
+      });
     });
-  }
+  });
 
     res.status(err.statusCode).send('Error occurred during PDF conversion to PPTX.');
     }
@@ -120,33 +134,40 @@ export const convertToXLSX = async (req, res) => {
 
     // Set operation input from a source file
     const input = PDFServicesSdk.FileRef.createFromLocalFile(
-        `./tmp/${req.file.originalname}`);
+        `/tmp/${req.file.originalname}`);
     exportPdfOperation.setInput(input);
     
     const name = req.file.originalname;
     const newName = name.split(".")[0];
     // Execute the operation and Save the result to the specified location.
     const result = await exportPdfOperation.execute(executionContext);
-    await result.saveAsFile(`./tmp/${newName}`)
+    await result.saveAsFile(`/tmp/${newName}`)
     
     res.status(200).send('converted');
     } catch (err) {
     console.log('Exception encountered while executing operation:', err);
 
-    const folderPath = `./tmp`;
+    const folderPath = `/tmp`;
 
-  if( fs.existsSync(folderPath) ){
-    fs.rm(folderPath, {recursive: true}, (error) => {
-      if (error) {
-        console.error('Error deleting tmp folder', error);
-        // res.status(500).send('Error deleting tmp folder');
-      } else {
-        console.log('tmp folder deleted successfully');
-        // res.status(200).send('tmp folder deleted successfully');
-        // res.status(200).send('Original file deleted');
-      }
+
+  fs.readdir(folderPath, (error, files) => {
+    if (error) {
+      console.error('Error reading folder:', error);
+      res.status(500).send('Error deleting files in tmp folder');
+      return;
+    }
+  
+    files.forEach((file) => {
+      const filePath = join(folderPath, file);
+      fs.unlink(filePath, (error) => {
+        if (error) {
+          console.error('Error deleting file:', error);
+        } else {
+          console.log(`Deleted file: ${filePath}`);
+        }
+      });
     });
-  }
+  });
 
     res.status(err.statusCode).send('Error occurred during PDF conversion to XLSX.');
     }
@@ -171,14 +192,14 @@ export const convertToZip = async (req, res) => {
 
     // Set operation input from a source file
     const input = PDFServicesSdk.FileRef.createFromLocalFile(
-        `./tmp/${req.file.originalname}`);
+        `/tmp/${req.file.originalname}`);
     exportPDFToImagesOperation.setInput(input);
 
     const name = req.file.originalname;
     const newName = name.split(".")[0];
     // Execute the operation and Save the result to the specified location.
     await exportPDFToImagesOperation.execute(executionContext)
-        .then(result => result[0].saveAsFile(`./tmp/${newName}`))
+        .then(result => result[0].saveAsFile(`/tmp/${newName}`))
         .catch( err => {
             console.log('Exception encountered while executing operation', err);
         });
@@ -189,20 +210,27 @@ export const convertToZip = async (req, res) => {
     } catch (err) {
     console.log('Exception encountered while executing operation', err);
     
-    const folderPath = `./tmp`;
+    const folderPath = `/tmp`;
 
-  if( fs.existsSync(folderPath) ){
-    fs.rm(folderPath, {recursive: true}, (error) => {
-      if (error) {
-        console.error('Error deleting tmp folder', error);
-        // res.status(500).send('Error deleting tmp folder');
-      } else {
-        console.log('tmp folder deleted successfully');
-        // res.status(200).send('tmp folder deleted successfully');
-        // res.status(200).send('Original file deleted');
-      }
+
+  fs.readdir(folderPath, (error, files) => {
+    if (error) {
+      console.error('Error reading folder:', error);
+      res.status(500).send('Error deleting files in tmp folder');
+      return;
+    }
+  
+    files.forEach((file) => {
+      const filePath = join(folderPath, file);
+      fs.unlink(filePath, (error) => {
+        if (error) {
+          console.error('Error deleting file:', error);
+        } else {
+          console.log(`Deleted file: ${filePath}`);
+        }
+      });
     });
-  }
+  });
 
     res.status(err.statusCode).send('Error occurred during PDF conversion to JPG.');
     }
@@ -212,7 +240,7 @@ export const downloadController = async (req, res) => {
     const name = req.params.name;
     const ext = req.params.type;
     const newName = name.split(".")[0] + ext;
-    const convertedPDFPath = `./tmp/${newName}`;
+    const convertedPDFPath = `/tmp/${newName}`;
 
     // Set the appropriate headers for the response
     if( ext === '.docx' ){
@@ -231,18 +259,27 @@ export const downloadController = async (req, res) => {
 };
 
 export const deleteFiles = async (req, res) => {
-    const folderPath = `./tmp`;
+  const folderPath = `/tmp`;
 
-  if( fs.existsSync(folderPath) ){
-    fs.rm(folderPath, {recursive: true}, (error) => {
-      if (error) {
-        console.error('Error deleting tmp folder', error);
-        res.status(500).send('Error deleting tmp folder');
-      } else {
-        console.log('tmp folder deleted successfully');
-        res.status(200).send('tmp folder deleted successfully');
-        // res.status(200).send('Original file deleted');
-      }
+
+  fs.readdir(folderPath, (error, files) => {
+    if (error) {
+      console.error('Error reading folder:', error);
+      res.status(500).send('Error deleting files in tmp folder');
+      return;
+    }
+  
+    files.forEach((file) => {
+      const filePath = join(folderPath, file);
+      fs.unlink(filePath, (error) => {
+        if (error) {
+          console.error('Error deleting file:', error);
+        } else {
+          console.log(`Deleted file: ${filePath}`);
+        }
+      });
     });
-  }
+  });
+
+  res.status(200).send('All files in tmp folder deleted successfully');
 };
