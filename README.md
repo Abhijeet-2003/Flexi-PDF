@@ -1,4 +1,4 @@
-### This is a PDF processing website tht deals with PDF compression and format conversion to DOCX, PPTX, XLSX and zip of JPGs. 
+### This is a PDF processing website that deals with PDF compression and format conversion to DOCX, PPTX, XLSX and zip of JPGs. 
 
 <br/>
 
