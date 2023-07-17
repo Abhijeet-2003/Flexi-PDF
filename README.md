@@ -1,3 +1,4 @@
+# Flexi-PDF
 ### This is a PDF processing website that deals with PDF compression and format conversion to DOCX, PPTX, XLSX and zip of JPGs. 
 
 <br/>
@@ -14,6 +15,6 @@ CLIENT_SECRET = { Your CLIENT_SECRET }
 ```
 * Start the server using the command ```nodemon app``` and the client using ```npm start```.
 
-Now you have your own PDF compressor/convertor 🚀.
+Now, you have your own PDF compressor/convertor 🚀.
 
 Deployment Link of this project - [https://flexi-pdf.vercel.app/](https://flexi-pdf.vercel.app/)
